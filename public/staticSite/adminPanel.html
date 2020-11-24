@@ -1,0 +1,98 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css"> 
+    <title>Guitar Shop</title>
+</head>
+<body>
+    
+    <nav class="navbar">
+        <div class="brand-name">Impericion - Band Merch</div>
+        <a href="#" class="toggle-button">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </a>
+        <div class="navbar-links">
+            <ul>
+                <li><a href="index.html" >Browse</a></li>
+                <li><a href="wishlist.html">Wishlist</a></li>
+                <li><a href="adminPanel.html" class="active-page">Admin Panel</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="wishlist-container">
+        <div class="wishlist-subcontainer">
+            <div class="item-form">
+                <h3>Add or Update Item</h3>
+                <form>    
+                    <input type="radio" name="rbModifier"value="add" id="add" checked='checked'>
+                    <label for="add">Add</label> 
+                    <input type="radio" name="rbModifier"value="update" id="update">
+                    <label for="add">Update</label>
+                </form>
+                <form method="post" enctype="multipart/form-data">
+                    <div class="modify-item-form">
+                        <select name="itemsList" id="itemsList">
+                            <option value="" selected disabled hidden>Choose an item to modify:</option>
+                            <option value="emmureShirt">Emmure Longsleeve</option>
+                            <option value="emmureShirt">Emmure Longsleeve</option>
+                            <option value="emmureShirt">Emmure Longsleeve</option>
+                            <option value="emmureShirt">Emmure Longsleeve</option>
+                        </select>
+                        <input name="itemName" id="itemName" placeholder="Item Name">
+                        <input name="bandName" id="bandName" placeholder="Band Name">
+                        <textarea name="itemDescription" id="itemDescription" placeholder="Description" rows="5"></textarea>
+                        <input name="itemPrice" id="itemPrice" placeholder="Price" type="number">
+                        Available Sizes:
+                        <div>
+                            <input type="checkbox" id="xs" name="xs" value="XS">
+                            <label for="xs">XS</label><br>
+                            <input type="checkbox" id="s" name="s" value="S">
+                            <label for="s">S</label><br>
+                            <input type="checkbox" id="m" name="m" value="M">
+                            <label for="m">M</label><br>
+                            <input type="checkbox" id="l" name="l" value="L">
+                            <label for="l">L</label><br>
+                            <input type="checkbox" id="xl" name="xl" value="XL">
+                            <label for="xl">XL</label><br>
+                        </div>
+                        <select name="itemType" id="itemType">
+                            <option value="" selected="selected" disabled="disabled" hidden="hidden">Choose here:</option>
+                            <option value="shirt">Shirt</option>
+                            <option value="sweatshirt">Sweatshirt</option>
+                            <option value="hat">Hat</option>
+                        </select>
+                        <input name="buyLink" id="buyLink" type="url" placeholder="Link to a Seller">
+                        
+                        <label for="itemPicture" class="custom-file-upload">
+                            <b>Click To Upload A Picture of the Clothing Item</b>
+                        </label>
+                        <input name="itemPicture" type="file" id="itemPicture">
+                      
+                            <input type="button" name="removeBtn" id="removeBtn" value="Remove Item">
+                            <input type="submit" name="submitBtn" id="submitBtn">
+                        
+                    </div>
+                    
+                </form>
+            </div>
+            <div class="statistics-panel">
+                <h3>View Number of Items for a Band</h3>
+                <p>Pick a band:</p>
+                <select name="bandsList" id="bandsList">
+                    <option value="" selected disabled hidden>Choose here:</option>
+                    <option value="emmure">Emmure</option>
+                    <option value="adaytoremember">A day to remember</option>
+                </select>
+                <p>The band Emmure has <b>4</b> Items on this website</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

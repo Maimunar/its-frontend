@@ -1,0 +1,122 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css"> 
+    <title>Guitar Shop</title>
+</head>
+<body>
+    
+    <nav class="navbar">
+        <div class="brand-name">Impericion - Band Merch</div>
+        <a href="#" class="toggle-button">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </a>
+        <div class="navbar-links">
+            <ul>
+                <li><a href="index.html" class="active-page">Browse</a></li>
+                <li><a href="wishlist.html">Wishlist</a></li>
+                <li><a href="adminPanel.html">Admin Panel</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="wishlist-container">
+        <div class="wishlist-subcontainer">
+            <div class="search-container">
+                <h3>Search for a specific Item</h3>
+                <div class="sort-by-band">
+                    <h4>Sort by band:</h4>
+                    <select name="bandsList" id="bandsList">
+                        <option value="" selected disabled hidden>Choose here:</option>
+                        <option value="emmure">Emmure</option>
+                        <option value="adaytoremember">A day to remember</option>
+                    </select>
+                </div>
+                <div class="sort-by-size">
+                    <h4>Find items in your size</h4>
+                    <input type="checkbox" id="xs" name="xs" value="XS">
+                    <label for="xs">XS</label><br>
+                    <input type="checkbox" id="s" name="s" value="S">
+                    <label for="s">S</label><br>
+                    <input type="checkbox" id="m" name="m" value="M">
+                    <label for="m">M</label><br>
+                    <input type="checkbox" id="l" name="l" value="L">
+                    <label for="l">L</label><br>
+                    <input type="checkbox" id="xl" name="xl" value="XL">
+                    <label for="xl">XL</label>
+                </div>
+                <h4>Find all items above this price:</h4>
+                <div class="sort-by-price">
+                    <div class="slidecontainer">
+                        <input type="range" min="1" max="100" value="1" class="slider" id="myRange">
+                    </div>
+                    <p id="demo"></p>
+                </div>
+            </div>
+            <div class="content-container">
+                <a href="productPage.html">
+                    <div class="item-card">
+                        <div class="product-item-picture-container"><img src="emmure.jpg" alt=""></div>
+                        <div class="product-item-title">
+                            <h4>Emmure Longsleeve</h4>
+                        </div>
+                        <div class="product-item-price">
+                            <p>25.99 $</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="productPage.html">
+                    <div class="item-card">
+                        <div class="product-item-picture-container"><img src="emmure.jpg" alt=""></div>
+                        <div class="product-item-title">
+                            <h4>Emmure Longsleeve</h4>
+                        </div>
+                        <div class="product-item-price">
+                            <p>25.99 $</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="productPage.html">
+                    <div class="item-card">
+                        <div class="product-item-picture-container"><img src="emmure.jpg" alt=""></div>
+                        <div class="product-item-title">
+                            <h4>Emmure Longsleeve</h4>
+                        </div>
+                        <div class="product-item-price">
+                            <p>25.99 $</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="productPage.html">
+                    <div class="item-card">
+                        <div class="product-item-picture-container"><img src="emmure.jpg" alt=""></div>
+                        <div class="product-item-title">
+                            <h4>Emmure Longsleeve</h4>
+                        </div>
+                        <div class="product-item-price">
+                            <p>25.99 $</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="productPage.html">
+                    <div class="item-card">
+                        <div class="product-item-picture-container"><img src="emmure.jpg" alt=""></div>
+                        <div class="product-item-title">
+                            <h4>Emmure Longsleeve</h4>
+                        </div>
+                        <div class="product-item-price">
+                            <p>25.99 $</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
