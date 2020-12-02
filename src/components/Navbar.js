@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 
-const Navbar = ({ match, ...props }) => {
+const Navbar = ({ match, userType, ...props }) => {
     const history = useHistory()
 
     const [activePages, setActivePages] = useState(['', '', '', ''])
@@ -54,14 +54,28 @@ const Navbar = ({ match, ...props }) => {
                     <li>
                         <Link to="/" className={activePages[0]}>Browse</Link>
                     </li>
-                    <li>
-                        <Link to="/wishlist" className={activePages[1]}>Wishlist</Link>
-                    </li>
+
+                    {localStorage.getItem('token') ?
+                        <li>
+                            <Link to="/wishlist" className={activePages[1]}>Wishlist</Link>
+                        </li>
+                        : ''}
+
+                    {/* Check for an admin, comment out for testing purposes
+                        TODO: Remove Comments
+                    */}
+                    {/* {userType === 'admin' ? */}
                     <li>
                         <Link to="/admin" className={activePages[2]}>Admin Panel</Link>
                     </li>
+                    {/* :''} */}
+
                     <li>
-                        <Link to="/login" className={activePages[3]}>Login</Link>
+                        {localStorage.getItem('token') ?
+                            <Link to="/logout" className={activePages[3]}>Logout</Link> :
+                            <Link to="/login" className={activePages[3]}>Login</Link>
+                        }
+
                     </li>
                 </ul>
             </div>

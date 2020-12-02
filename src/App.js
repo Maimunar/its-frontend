@@ -12,19 +12,27 @@ import LoginPage from './pages/LoginPage'
 import ItemPage from './pages/ItemPage'
 import NotFoundPage from './pages/NotFoundPage'
 import RegisterPage from './pages/RegisterPage'
-
+import LogoutPage from './pages/LogoutPage'
+import { useState } from 'react';
 
 function App() {
+
+  const [userType, setUserType] = useState('user')
+  const changeUserType = (newType) => {
+    setUserType(newType)
+  }
+
   return (
     <Router>
       <div className="App">
-        <Navbar />
+        <Navbar userType={userType} />
         <div id="page-body">
           <Switch>
             <Route path="/" component={BrowsePage} exact />
             <Route path='/admin' component={AdminPanel} />
             <Route path="/wishlist" component={WishlistPage} />
-            <Route path="/login" component={LoginPage} />
+            <Route path="/login" render={(props) => <LoginPage changeUserType={changeUserType} />} />
+            <Route path="/logout" render={(props) => <LogoutPage changeUserType={changeUserType} />} />
             <Route path="/register" component={RegisterPage} />
             <Route path="/item/:itemName" component={ItemPage} />
             <Route component={NotFoundPage} />
