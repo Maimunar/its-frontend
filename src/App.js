@@ -13,14 +13,29 @@ import ItemPage from './pages/ItemPage'
 import NotFoundPage from './pages/NotFoundPage'
 import RegisterPage from './pages/RegisterPage'
 import LogoutPage from './pages/LogoutPage'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import axios from 'axios'
+import config from './jwtconfig'
 
 function App() {
 
   const [userType, setUserType] = useState('user')
+  const [items, setItems] = useState([])
+
   const changeUserType = (newType) => {
     setUserType(newType)
   }
+
+  const getItemNames = () => {
+    axios.get('/api/items', config)
+      .then((res) => {
+        console.log(res.data)
+        setItems(res.data)
+        return res.data
+      })
+      .catch((err) => console.log(err))
+  }
+  useEffect(getItemNames, [])
 
   return (
     <Router>
@@ -28,8 +43,8 @@ function App() {
         <Navbar userType={userType} />
         <div id="page-body">
           <Switch>
-            <Route path="/" component={BrowsePage} exact />
-            <Route path='/admin' component={AdminPanel} />
+            <Route path="/" render={(props) => <BrowsePage items={items} />} exact />
+            <Route path='/admin' render={(props) => <AdminPanel items={items} setItems={setItems} getItemNames={getItemNames} />} />
             <Route path="/wishlist" component={WishlistPage} />
             <Route path="/login" render={(props) => <LoginPage changeUserType={changeUserType} />} />
             <Route path="/logout" render={(props) => <LogoutPage changeUserType={changeUserType} />} />

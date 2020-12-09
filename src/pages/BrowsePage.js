@@ -1,17 +1,23 @@
-import React from 'react'
-import axios from 'axios'
+import React, { useEffect, useState } from 'react'
+import ItemsSorter from '../components/BrowsePage/ItemsSorter'
+import ItemsList from '../components/BrowsePage/ItemsList'
 
-const BrowsePage = () => {
-    const config = {
-        headers: {
-            Authorization: 'Bearer ' + localStorage.getItem('token')
-        }
-    };
-    axios.get('/api/users/authuseronly', config).then((res) => { console.log(res) })
-    axios.get('/api/users/adminonly', config).then((res) => { console.log(res) })
+const BrowsePage = ({ items }) => {
+
+    const [itemsView, setItemsView] = useState(items)
+
+    useEffect(() => setItemsView(items), [items])
+
     return (
-        "browse page"
+        <div class="wishlist-container">
+            <div class="wishlist-subcontainer">
+                <ItemsSorter items={itemsView} setItems={setItemsView} />
+                <ItemsList items={itemsView} />
+            </div>
+        </div>
     )
 }
+
+
 
 export default BrowsePage;

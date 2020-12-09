@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import AddItem from '../components/AddItem'
-import ModifyItem from '../components/ModifyItem'
-import ItemsStatistics from '../components/ItemsForABandStatistics'
-const AdminPanel = () => {
+import AddItem from '../components/AdminPanel/AddItem'
+import ModifyItem from '../components/AdminPanel/ModifyItem'
+import ItemsStatistics from '../components/AdminPanel/ItemsForABandStatistics'
+const AdminPanel = ({ items, setItems, getItemNames }) => {
 
     const [itemMode, setItemMode] = useState('add')
 
@@ -20,8 +20,8 @@ const AdminPanel = () => {
                     <input type="radio" name="rbModifier" value="update" id="update" />
                     <label >Update</label>
                 </div> <br />
-                {itemMode === 'add' ? <AddItem /> : <ModifyItem />}
-                <ItemsStatistics />
+                {itemMode === 'add' ? <AddItem items={items} setItems={setItems} getItemNames={getItemNames} /> : <ModifyItem items={items} setItems={setItems} getItemNames={getItemNames} />}
+                <ItemsStatistics items={items} />
             </div>
         </div>
     )
