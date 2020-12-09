@@ -1,6 +1,8 @@
+import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
 const ItemsSorter = ({ items, setItems }) => {
+    const [allItems, setAllItems] = useState(items)
     const [bands, setBands] = useState()
     const [selectedBand, setSelectedBand] = useState('default')
     const [XS, setXS] = useState(false)
@@ -8,12 +10,18 @@ const ItemsSorter = ({ items, setItems }) => {
     const [M, setM] = useState(false)
     const [L, setL] = useState(false)
     const [XL, setXL] = useState(false)
+    const [priceFilter, setPriceFilter] = useState(0.00)
+    const [maxPrice, setMaxPrice] = useState()
 
     const getBands = () => {
-        let bandsList = items.map(item => item.bandName)
+        if (allItems.length === 0) setAllItems(items)
+
+        let bandsList = allItems.map(item => item.bandName)
         bandsList = [...new Set(bandsList)]
         setBands(bandsList)
     }
+
+
 
 
     const getSizes = () => {
@@ -25,33 +33,69 @@ const ItemsSorter = ({ items, setItems }) => {
         return returnSizes
     }
 
+    const sizesToString = (sizesToConvert) => {
+        let returnString = "["
+        sizesToConvert.forEach((size, index) => {
+            returnString += `"${size}",`
+        })
+        returnString = returnString.slice(0, -1) + ']'
+        return returnString
+    }
+
     const filterItems = () => {
-        let tempItems = items
         let searchQuery = '?'
+        let firstItemAdded = false
         //Sort by Band Check
         if (selectedBand !== 'default') {
-            console.log('Band filter')
-            console.log(`selectedBand`)
+            searchQuery += `band=${selectedBand}`
+            firstItemAdded = true
         }
         let sizes = getSizes()
         if (sizes.length > 0) {
-            console.log('Sizes filter')
-            console.log(sizes)
+            if (firstItemAdded)
+                searchQuery += `&sizes=${sizesToString(sizes)}`
+            else {
+                searchQuery += `sizes=${sizesToString(sizes)}`
+                firstItemAdded = true
+            }
+        }
+        if (priceFilter > 0) {
+            if (firstItemAdded)
+                searchQuery += `&price=${priceFilter}`
+            else {
+                searchQuery += `price=${priceFilter}`
+                firstItemAdded = true
+            }
         }
 
+        axios.get('/api/items' + searchQuery)
+            .then((res) => setItems(res.data))
+            .catch((err) => console.log(err))
 
-        setItems(tempItems)
     }
 
-    useEffect(getBands, [items])
-    useEffect(filterItems, [XS, S, M, L, XL, selectedBand])
+    const getMaxPrice = () => {
+        if (allItems.length === 0) setAllItems(items)
+        let max = 0;
+        allItems.forEach(item => {
+            if (item.price > max) max = item.price
+        })
+        max = Math.floor(max)
+        setMaxPrice(max)
+    }
+
+    useEffect(() => { if (allItems.length === 0) setAllItems(items) }, [items])
+    useEffect(getMaxPrice, [allItems])
+    useEffect(getBands, [allItems])
+    useEffect(filterItems, [XS, S, M, L, XL, selectedBand, priceFilter])
+
     return (
         <div className="search-container">
             <h3>Search for a specific Item</h3>
             <div className="sort-by-band">
                 <h4>Sort by band:</h4>
                 <select name="bandsList" value={selectedBand} id="bandsList" onChange={(e) => setSelectedBand(e.target.value)} >
-                    <option value="default" hidden>Choose Here:</option>
+                    <option value="default">All Bands</option>
                     {bands ? bands.map((item, index) =>
                         <option value={item} key={index}>{item}</option>
                     ) : ""}
@@ -73,18 +117,13 @@ const ItemsSorter = ({ items, setItems }) => {
             <div className="sort-by-price">
                 <h4>Find all items above this price:</h4>
                 <div class="slidecontainer">
-                    <input type="range" min="1" max="100" class="slider" id="myRange" />
+                    <input type="range" min="0" onMouseUp={(e) => setPriceFilter(e.target.value)}
+                        max={maxPrice} class="slider" id="myRange" />
                 </div>
-                <p id="priceTag"></p>
+                <p id="priceTag">{priceFilter}</p>
             </div>
         </div>
     )
 }
-
-
-// <div class="sort-by-price">
-
-// </div>
-// </div>
-
+// onChange={(e) => setPriceFilter(e.target.value)}
 export default ItemsSorter;

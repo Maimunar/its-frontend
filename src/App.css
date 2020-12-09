@@ -331,7 +331,7 @@ margin-left: 4px;
   border-bottom: 2px solid rgb(32, 25, 25);
 }
 
-#itemsList, #itemName, #bandName, #itemDescription, #itemPrice, #buyLink, #removeBtn, #submitBtn, #bandsList, #itemType, #userName, #password, #email {
+#itemsList, #itemName, #bandName, #itemDescription, #itemPrice, #buyLink, #removeBtn, #submitBtn, #bandsList, #itemType, #userName, #password, #email, .clear-wishlist-btn, .btn-add-to-wishlist {
   color: white;
   border: 2px solid rgb(32, 25, 25);
   background-color: rgb(38, 41, 41);
@@ -339,6 +339,18 @@ margin-left: 4px;
   max-width: 100%;
   min-height: 2rem;
   resize: none;
+}
+
+.delete-btn h3 {
+  font-size: 2rem;
+  color: red;
+  margin-right: 25px;
+}
+
+.delete-btn h3:hover {
+  color:white;
+  background-color: red;
+  border: 2px solid white;
 }
 
 #itemsList:hover, #itemName:hover, #bandName:hover, #itemDescription:hover, #itemPrice:hover, #buyLink:hover, #bandsList:hover, #itemType:hover,#email:hover, #userName:hover, #password:hover, .delete-btn:hover{
@@ -349,17 +361,17 @@ margin-left: 4px;
   display: none;
 }
 
-#removeBtn:hover{
+#removeBtn:hover, .clear-wishlist-btn:hover{
   background-color: red ;
   border-color: white;
 }
 
-#removeBtn, #submitBtn, .custom-file-upload {
+#removeBtn, #submitBtn, .custom-file-upload, .clear-wishlist-btn {
   margin: 5 20;
   padding: 10;
 }
 
-#submitBtn:hover {
+#submitBtn:hover, .btn-add-to-wishlist:hover  {
   background-color: #fd77eb;
   border-color: white;
 }
@@ -412,14 +424,14 @@ margin-left: 4px;
   grid-auto-rows: minmax(150px, auto);
 }
 
-.login-form p, .modify-item-form p {
+.login-form p, .modify-item-form p, .wishlist-title h2 {
   color: red;
   margin: 0;
   padding: 0;
   font-size: .8rem;
 }
 
-.modify-item-form h5 {
+.modify-item-form h5, .wishlist-title h3 {
   color: green;
   margin: 0;
   padding: 0;

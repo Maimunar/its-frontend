@@ -1,13 +1,17 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 
 const ItemOnBrowse = ({ item }) => {
+
+    const [defaultPic, setDefaultPic] = useState('./no-image-available.jpg')
+
 
     return (
         <Link to={'/item/' + item.itemName}>
             <div className="item-card">
                 <div className='product-item-picture-container'>
-                    <img src={"/api/items/itemPicture/" + item.itemPicture} alt={item.itemName} />
+                    <img src={"/api/items/itemPicture/" + item.itemPicture} onError={(e) => e.target.src = defaultPic} />
                 </div>
                 <div className="product-item-title">
                     <h4>{item.itemName}</h4>
