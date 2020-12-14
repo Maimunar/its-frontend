@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { Link, Redirect } from 'react-router-dom'
+import config from '../jwtconfig'
 const RegisterPage = () => {
 
     const [username, setUsername] = useState('')
@@ -83,7 +84,7 @@ const RegisterPage = () => {
                 username: username,
                 email: email,
                 password: password,
-            }).then((res) => {
+            }, config(localStorage.getItem('token'))).then((res) => {
                 console.log(res)
                 setSuccesfulRegister(true)
             })

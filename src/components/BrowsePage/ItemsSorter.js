@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import config from '../../jwtconfig'
 
 const ItemsSorter = ({ items, setItems }) => {
     const [allItems, setAllItems] = useState(items)
@@ -68,7 +69,7 @@ const ItemsSorter = ({ items, setItems }) => {
             }
         }
 
-        axios.get('/api/items' + searchQuery)
+        axios.get('/api/items' + searchQuery, config(localStorage.getItem('token')))
             .then((res) => setItems(res.data))
             .catch((err) => console.log(err))
 

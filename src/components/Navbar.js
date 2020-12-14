@@ -4,24 +4,27 @@ import { Link, useHistory } from 'react-router-dom'
 const Navbar = ({ match, userType, ...props }) => {
     const history = useHistory()
 
-    const [activePages, setActivePages] = useState(['', '', '', ''])
+    const [activePages, setActivePages] = useState(['', '', '', '', ''])
 
     const toggleActivePage = (path) => {
         switch (path) {
             case '/':
-                setActivePages(['active-page', '', '', ''])
+                setActivePages(['active-page', '', '', '', ''])
+                break;
+            case '/chat':
+                setActivePages(['', 'active-page', '', '', ''])
                 break;
             case '/wishlist':
-                setActivePages(['', 'active-page', '', ''])
+                setActivePages(['', '', 'active-page', '', ''])
                 break;
             case '/admin':
-                setActivePages(['', '', 'active-page', ''])
+                setActivePages(['', '', '', 'active-page', ''])
                 break;
             case '/login':
-                setActivePages(['', '', '', 'active-page'])
+                setActivePages(['', '', '', '', 'active-page'])
                 break;
             default: {
-                setActivePages(['', '', '', '']);
+                setActivePages(['', '', '', '', '']);
                 break;
             }
         }
@@ -57,7 +60,12 @@ const Navbar = ({ match, userType, ...props }) => {
 
                     {localStorage.getItem('token') ?
                         <li>
-                            <Link to="/wishlist" className={activePages[1]}>Wishlist</Link>
+                            <Link to="/chat" className={activePages[1]}>Chat</Link>
+                        </li>
+                        : ''}
+                    {localStorage.getItem('token') ?
+                        <li>
+                            <Link to="/wishlist" className={activePages[2]}>Wishlist</Link>
                         </li>
                         : ''}
 
@@ -66,14 +74,14 @@ const Navbar = ({ match, userType, ...props }) => {
                     */}
                     {/* {userType === 'admin' ? */}
                     <li>
-                        <Link to="/admin" className={activePages[2]}>Admin Panel</Link>
+                        <Link to="/admin" className={activePages[3]}>Admin Panel</Link>
                     </li>
                     {/* :''} */}
 
                     <li>
                         {localStorage.getItem('token') ?
-                            <Link to="/logout" className={activePages[3]}>Logout</Link> :
-                            <Link to="/login" className={activePages[3]}>Login</Link>
+                            <Link to="/logout" className={activePages[4]}>Logout</Link> :
+                            <Link to="/login" className={activePages[4]}>Login</Link>
                         }
 
                     </li>

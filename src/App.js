@@ -16,9 +16,10 @@ import LogoutPage from './pages/LogoutPage'
 import { useEffect, useState } from 'react';
 import axios from 'axios'
 import config from './jwtconfig'
+import ChatPage from './pages/ChatPage';
 
 function App() {
-
+  const [user, setUser] = useState()
   const [userType, setUserType] = useState('user')
   const [items, setItems] = useState([])
 
@@ -27,7 +28,7 @@ function App() {
   }
 
   const getItemNames = () => {
-    axios.get('/api/items', config)
+    axios.get('/api/items', config(localStorage.getItem('token')))
       .then((res) => {
         console.log(res.data)
         setItems(res.data)
@@ -45,9 +46,10 @@ function App() {
           <Switch>
             <Route path="/" render={(props) => <BrowsePage items={items} />} exact />
             <Route path='/admin' render={(props) => <AdminPanel items={items} setItems={setItems} getItemNames={getItemNames} />} />
-            <Route path="/wishlist" component={WishlistPage} />
-            <Route path="/login" render={(props) => <LoginPage changeUserType={changeUserType} />} />
-            <Route path="/logout" render={(props) => <LogoutPage changeUserType={changeUserType} />} />
+            <Route path="/chat" render={(props) => <ChatPage user={user} />} />
+            <Route path="/wishlist" render={(props) => <WishlistPage user={user} />} />
+            <Route path="/login" render={(props) => <LoginPage changeUserType={changeUserType} setUser={setUser} />} />
+            <Route path="/logout" render={(props) => <LogoutPage changeUserType={changeUserType} setUser={setUser} />} />
             <Route path="/register" component={RegisterPage} />
             <Route path="/item/:itemName" component={ItemPage} />
             <Route component={NotFoundPage} />

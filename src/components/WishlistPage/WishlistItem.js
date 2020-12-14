@@ -6,7 +6,9 @@ import config from '../../jwtconfig'
 const WishlistItem = ({ item }) => {
 
     const handleDelete = (e) => {
-        axios.delete('/api/wishlist/' + localStorage.getItem('user'), { data: { itemName: item.itemName } }, config)
+        axios.post('/api/wishlist/deleteItem/' + localStorage.getItem('user'),
+         {itemName: item.itemName }, 
+         config(localStorage.getItem('token')))
             .then((res) => console.log(res))
             .catch((err) => console.log(err))
     }

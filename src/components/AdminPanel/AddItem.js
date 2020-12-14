@@ -126,7 +126,7 @@ const AddItem = ({ items, setItems, getItemNames }) => {
                 `
             )
 
-            axios.post('/api/items/modifyItem', form, config)
+            axios.post('/api/items/modifyItem', form, config(localStorage.getItem('token')))
                 .then((res) => console.log(res))
                 .then(() => {
                     getItemNames()

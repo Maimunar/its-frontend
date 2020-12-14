@@ -155,7 +155,7 @@ const ModifyItem = ({ items, setItems, getItemNames }) => {
                     File With State: ${itemPicture}
                     `
                 )
-                axios.put('/api/items/modifyItem', form, config)
+                axios.put('/api/items/modifyItem', form, config(localStorage.getItem('token')))
                     .then((res) => console.log(res))
                     .then(() => getItemNames())
                     .then(() => {
@@ -172,7 +172,7 @@ const ModifyItem = ({ items, setItems, getItemNames }) => {
                 let form = new FormData()
                 form.append('itemName', itemName)
 
-                axios.post('/api/items/deleteItem', form, config)
+                axios.post('/api/items/deleteItem', form, config(localStorage.getItem('token')))
                     .then((res) => {
                         console.log(res)
                         console.log('Successfuly deleted')

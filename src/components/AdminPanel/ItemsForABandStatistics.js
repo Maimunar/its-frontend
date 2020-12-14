@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import config from '../../jwtconfig'
 
 const ItemsForABandStatistics = ({ items }) => {
     const [bands, setBands] = useState()
@@ -12,7 +13,7 @@ const ItemsForABandStatistics = ({ items }) => {
     }
     const getBandInfo = () => {
         if (selectedBand === 'default') return
-        axios.get(`/api/items/perBand/${selectedBand}`)
+        axios.get(`/api/items/perBand/${selectedBand}`, config(localStorage.getItem('token')))
             .then((res) => {
                 if (res.status === 200)
                     setItemsText(res.data)

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import config from '../jwtconfig'
 
 const ItemPage = ({ match }) => {
     const [item, setItem] = useState({
@@ -24,7 +25,7 @@ const ItemPage = ({ match }) => {
 
 
     const getItem = () => {
-        axios.get('/api/items/' + match.params.itemName)
+        axios.get('/api/items/' + match.params.itemName, config(localStorage.getItem('token')))
             .then((res) => setItem(res.data))
             .catch((err) => console.log(err))
     }
@@ -35,7 +36,7 @@ const ItemPage = ({ match }) => {
                 itemName: item.itemName,
                 linkToReseller: item.linkToReseller,
                 itemPicture: item.itemPicture
-            })
+            }, config(localStorage.getItem('token')))
                 .then((res) => {
                     console.log(res)
                     handleSuccess(res.data)

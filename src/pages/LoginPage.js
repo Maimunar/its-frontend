@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import axios from 'axios'
+import config from '../jwtconfig'
 
-const LoginPage = ({ changeUserType }) => {
+const LoginPage = ({ changeUserType, setUser }) => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState(false)
@@ -25,15 +26,16 @@ const LoginPage = ({ changeUserType }) => {
 
 
     const handleLogin = (e) => {
+        console.log(username)
+        console.log(password)
         axios.post('/api/users/login', {
             username: username,
             password: password
-        }, {
-            timeout: 5000
-        })
+        }, config(localStorage.getItem('token')))
             .then((res) => {
                 changeUserType(res.data.userType)
                 localStorage.setItem('token', res.data.token)
+                setUser(username)
                 localStorage.setItem('user', username)
                 setRedirect(true)
             })
@@ -60,7 +62,7 @@ const LoginPage = ({ changeUserType }) => {
                         <input type="submit" value="Login" id="submitBtn" className="login_btn"></input>
                     </form>
                     <div>
-                        {localStorage.getItem('token') ? <Redirect to="/" /> : ""}
+
                         <Link to="/register" className="link">Don't have an account? Sign Up</Link>
                         {redirect ? <Redirect to="/" /> : ""}
                     </div>

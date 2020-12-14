@@ -3,11 +3,11 @@ import React, { useEffect, useState } from 'react'
 import WishlistItem from '../components/WishlistPage/WishlistItem'
 import config from '../jwtconfig'
 
-const WishlistPage = () => {
+const WishlistPage = ({ user }) => {
     const [wishlist, setWishlist] = useState([])
 
     const clearWishlist = (e) => {
-        axios.post('/api/wishlist/clearWishlist/' + localStorage.getItem('user'), config)
+        axios.post('/api/wishlist/clearWishlist/' + user, config(localStorage.getItem('token')))
             .then((res) => {
                 console.log(res)
                 setWishlist([])
@@ -17,7 +17,7 @@ const WishlistPage = () => {
 
 
     const getWishlist = () => {
-        axios.get('/api/wishlist/' + localStorage.getItem('user'), config)
+        axios.get('/api/wishlist/' + user, config(localStorage.getItem('token')))
             .then((res) => {
                 setWishlist(res.data.wishlistItems)
             })
