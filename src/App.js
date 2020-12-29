@@ -41,7 +41,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Navbar userType={userType} />
+        <Navbar user={user} userType={userType} />
         <div id="page-body">
           <Switch>
             <Route path="/" render={(props) => <BrowsePage items={items} />} exact />

@@ -113,7 +113,6 @@ const RegisterPage = () => {
                         <input type="submit" value="Login" id="submitBtn" className="login_btn"></input>
                     </form>
                     <div>
-                        {localStorage.getItem('token') ? <Redirect to="/" /> : ""}
                         {succesfulRegister ? <Redirect to="/login" /> : ""}
                         <Link to="/login" className="link">Already have an account? Sign In</Link>
                     </div>

@@ -1,43 +1,10 @@
-import React, { useState, useEffect } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import React from 'react'
+import {withRouter, Link } from 'react-router-dom'
+const Navbar = ({ location, userType, user}) => {
 
-const Navbar = ({ match, userType, ...props }) => {
-    const history = useHistory()
-
-    const [activePages, setActivePages] = useState(['', '', '', '', ''])
-
-    const toggleActivePage = (path) => {
-        switch (path) {
-            case '/':
-                setActivePages(['active-page', '', '', '', ''])
-                break;
-            case '/chat':
-                setActivePages(['', 'active-page', '', '', ''])
-                break;
-            case '/wishlist':
-                setActivePages(['', '', 'active-page', '', ''])
-                break;
-            case '/admin':
-                setActivePages(['', '', '', 'active-page', ''])
-                break;
-            case '/login':
-                setActivePages(['', '', '', '', 'active-page'])
-                break;
-            default: {
-                setActivePages(['', '', '', '', '']);
-                break;
-            }
-        }
-    }
-    /*
-        This makes use of the router's history to track the active button on every uri change
-    */
-    useEffect(() => {
-        return history.listen((location) => {
-            toggleActivePage(location.pathname)
-            console.log(`You changed the page to: ${location.pathname}`)
-        })
-    }, [history])
+    const isActive = (route) => {
+        return location.pathname === route ? "active-page" : undefined;
+      };
 
     const toggleActive = () => {
         const navbarLinks = document.getElementsByClassName('navbar-links')[0];
@@ -55,33 +22,29 @@ const Navbar = ({ match, userType, ...props }) => {
             <div className="navbar-links">
                 <ul>
                     <li>
-                        <Link to="/" className={activePages[0]}>Browse</Link>
+                        <Link to="/" className={isActive("/")}>Browse</Link>
                     </li>
 
-                    {localStorage.getItem('token') ?
+                    {user ?
                         <li>
-                            <Link to="/chat" className={activePages[1]}>Chat</Link>
+                            <Link to="/chat" className={isActive("/chat")}>Chat</Link>
                         </li>
                         : ''}
-                    {localStorage.getItem('token') ?
+                    {user ?
                         <li>
-                            <Link to="/wishlist" className={activePages[2]}>Wishlist</Link>
+                            <Link to="/wishlist" className={isActive("/wishlist")}>Wishlist</Link>
                         </li>
                         : ''}
-
-                    {/* Check for an admin, comment out for testing purposes
-                        TODO: Remove Comments
-                    */}
-                    {/* {userType === 'admin' ? */}
+                    {userType === 'admin' ?
                     <li>
-                        <Link to="/admin" className={activePages[3]}>Admin Panel</Link>
+                        <Link to="/admin" className={isActive("/admin")}>Admin Panel</Link>
                     </li>
-                    {/* :''} */}
+                    : '' }
 
                     <li>
-                        {localStorage.getItem('token') ?
-                            <Link to="/logout" className={activePages[4]}>Logout</Link> :
-                            <Link to="/login" className={activePages[4]}>Login</Link>
+                        {user ?
+                            <Link to="/logout" className={isActive("/login")}>Logout</Link> :
+                            <Link to="/login" className={isActive("/login")}>Login</Link>
                         }
 
                     </li>
@@ -93,4 +56,4 @@ const Navbar = ({ match, userType, ...props }) => {
 
 
 
-export default Navbar
+export default withRouter(Navbar)

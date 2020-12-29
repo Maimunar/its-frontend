@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import Message from '../components/ChatPage/Message'
-import { socket } from '../service/socket'
+// import { socket } from '../service/socket'
 import axios from 'axios'
 import config from '../jwtconfig'
+import {io} from 'socket.io-client'
+
 
 const ChatPage = ({ user }) => {
-
     const [messages, setMessages] = useState([])
     const [messageToSend, setMessageToSend] = useState()
     const [error, setError] = useState()
@@ -17,24 +18,41 @@ const ChatPage = ({ user }) => {
     const getMessages = () => {
         console.log('getting messages')
         axios.get('/api/messages', config(localStorage.getItem('token')))
-            .then((res) => setMessages(res.data))
+            .then((res) => {
+                let msgs = res.data.map(item => {return {'username': item.username, 'message': item.message}})
+                setMessages(msgs)
+            })
             .catch((err) => console.log(err))
     }
     const postMessage = (e) => {
         e.preventDefault()
         if (messageToSend.length > 0 && user) {
-            axios.post('/api/messages', {
+            let sentMessage = {
                 username: user,
                 message: messageToSend
-            }, config(localStorage.getItem('token')))
+            }
+            axios.post('/api/messages', sentMessage, config(localStorage.getItem('token')))
                 .then(setMessageToSend(''))
                 .catch((err) => console.log(err))
         } else
             handleError('Please enter a message')
     }
 
-
-    useEffect(() => { socket.on('message', getMessages) }, [])
+    const addMessage = (message) => {
+        console.log('message received! message:', message)
+        let temp = [...messages]
+        console.log(messages)
+        temp.push(message)
+        console.log(temp)
+        setMessages(temp)
+        console.log(messages)
+    }
+    
+    useEffect(() => { 
+        const socket = io()
+        socket.on('message', addMessage)
+        return () => socket.disconnect()
+     }, [])
     useEffect(getMessages, [])
 
     return (
@@ -44,7 +62,7 @@ const ChatPage = ({ user }) => {
                     <h1>Chat with the community</h1>
                 </div>
                 <div className="chat-message-container">
-                    {error ? <h3>{error}</h3> : ""}
+                    {error ? <p>{error}</p> : ""}
                     <form action="" className="message-form">
                         <textarea placeholder="Write your message here" value={messageToSend}
                             onChange={(e) => setMessageToSend(e.target.value)} id="itemDescription" rows="5"></textarea>
