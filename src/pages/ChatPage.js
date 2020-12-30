@@ -40,12 +40,7 @@ const ChatPage = ({ user }) => {
 
     const addMessage = (message) => {
         console.log('message received! message:', message)
-        let temp = [...messages]
-        console.log(messages)
-        temp.push(message)
-        console.log(temp)
-        setMessages(temp)
-        console.log(messages)
+        setMessages((messages) => [...messages, message])
     }
     
     useEffect(() => { 
