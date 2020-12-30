@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { withRouter } from 'react-router-dom'
 import WishlistItem from '../components/WishlistPage/WishlistItem'
 import config from '../jwtconfig'
 
@@ -41,4 +42,4 @@ const WishlistPage = ({ user }) => {
     )
 }
 
-export default WishlistPage;
+export default withRouter(WishlistPage);

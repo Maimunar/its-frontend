@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import config from '../../jwtconfig'
 import ErrorDisplay from '../ErrorDisplay';
 
-const AddItem = ({ items, setItems, getItemNames }) => {
+const AddItem = ({ items, getItemNames }) => {
     const clothTypes = ["Shirt", "Sweatshirt", "Hat"]
     const [itemName, setItemName] = useState('')
     const [bandName, setBandName] = useState('')

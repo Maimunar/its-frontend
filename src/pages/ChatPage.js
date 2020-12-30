@@ -4,6 +4,7 @@ import Message from '../components/ChatPage/Message'
 import axios from 'axios'
 import config from '../jwtconfig'
 import {io} from 'socket.io-client'
+import { withRouter } from 'react-router-dom'
 
 
 const ChatPage = ({ user }) => {
@@ -75,4 +76,4 @@ const ChatPage = ({ user }) => {
     )
 }
 
-export default ChatPage
+export default withRouter(ChatPage)
