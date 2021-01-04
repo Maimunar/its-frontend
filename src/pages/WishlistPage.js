@@ -16,7 +16,6 @@ const WishlistPage = ({ user }) => {
             .catch((err) => console.log(err))
     }
 
-
     const getWishlist = () => {
         axios.get('/api/wishlist/' + user, config(localStorage.getItem('token')))
             .then((res) => {
@@ -26,6 +25,7 @@ const WishlistPage = ({ user }) => {
     }
 
     useEffect(getWishlist, [wishlist])
+    
     return (
         <div className="wishlist-container">
             <div className="wishlist-subcontainer">

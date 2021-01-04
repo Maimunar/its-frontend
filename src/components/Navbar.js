@@ -24,7 +24,6 @@ const Navbar = ({ location, userType, user}) => {
                     <li>
                         <Link to="/" className={isActive("/")}>Browse</Link>
                     </li>
-
                     {user ?
                         <li>
                             <Link to="/chat" className={isActive("/chat")}>Chat</Link>
@@ -40,20 +39,16 @@ const Navbar = ({ location, userType, user}) => {
                         <Link to="/admin" className={isActive("/admin")}>Admin Panel</Link>
                     </li>
                     : '' }
-
                     <li>
                         {user ?
                             <Link to="/logout" className={isActive("/login")}>Logout</Link> :
                             <Link to="/login" className={isActive("/login")}>Login</Link>
                         }
-
                     </li>
                 </ul>
             </div>
         </nav>
     )
 }
-
-
 
 export default withRouter(Navbar)

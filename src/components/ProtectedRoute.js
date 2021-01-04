@@ -8,13 +8,11 @@ const ProtectedRoute = ({
     
     return (
         <Route {...rest}
-        render={() => {
-            if (user) return <Component 
-            user={user} {...rest}
-            />
-            else return <Redirect to="/"/>
-        }
-        }
+            render={() => {
+                if (user) return <Component user={user} {...rest} />
+                else return <Redirect to="/"/>
+            }
+            }
         />
     )
 }

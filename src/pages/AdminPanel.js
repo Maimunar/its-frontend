@@ -3,6 +3,7 @@ import AddItem from '../components/AdminPanel/AddItem'
 import ModifyItem from '../components/AdminPanel/ModifyItem'
 import ItemsStatistics from '../components/AdminPanel/ItemsForABandStatistics'
 import { withRouter } from 'react-router-dom'
+
 const AdminPanel = ({ items, setItems, getItemNames }) => {
 
     const [itemMode, setItemMode] = useState('add')

@@ -25,7 +25,6 @@ const ModifyItem = ({ items, setItems, getItemNames }) => {
 
     const handlePictureChange = (e) => {
         setItemPicture(e.target.files[0])
-
     }
 
     const handleSuccess = (successString) => {
@@ -34,7 +33,6 @@ const ModifyItem = ({ items, setItems, getItemNames }) => {
     }
 
     const validateForm = () => {
-
         let errors = ''
         const foundError = (errorMessage) => {
             errors += `${errorMessage}\n`
@@ -64,13 +62,11 @@ const ModifyItem = ({ items, setItems, getItemNames }) => {
         if (!itemReseller || itemReseller.length === 0)
             foundError('Please fill in the item reseller!')
 
-        console.log(errors)
         if (errors.length === 0) return true
         else {
             setErrorMsg(errors)
             return false
         }
-
     }
 
     const validateDelete = () => {
@@ -119,11 +115,9 @@ const ModifyItem = ({ items, setItems, getItemNames }) => {
             setItemReseller('')
             setSizesObject([])
         }
-
     }
 
     const handleSubmit = (e) => {
-
         e.preventDefault()
         if (selectedBtn === 'submitBtn') {
             if (validateForm()) {
@@ -137,24 +131,6 @@ const ModifyItem = ({ items, setItems, getItemNames }) => {
                 form.set('linkToReseller', itemReseller)
                 form.set('itemPicture', itemPicture)
 
-                console.log(
-                    `
-                    Item Name: ${itemName}
-                    Band Name: ${bandName}
-                    Description: ${description}
-                    Price: ${price}
-                    Available Sizes:
-                    XS - ${XS}
-                    S - ${S}
-                    M - ${M}
-                    L - ${L}
-                    XL - ${XL}
-                    Clothing Type: ${itemType}
-                    Reseller Link: ${itemReseller}
-                    File with Reference: ${fileInput.current.files[0]}
-                    File With State: ${itemPicture}
-                    `
-                )
                 axios.put('/api/items/modifyItem', form, config(localStorage.getItem('token')))
                     .then((res) => console.log(res))
                     .then(() => getItemNames())
@@ -165,7 +141,6 @@ const ModifyItem = ({ items, setItems, getItemNames }) => {
                     })
                     .catch((err) => console.log(err))
             }
-
         }
         if (selectedBtn === 'removeBtn') {
             if (validateDelete()) {
@@ -186,7 +161,6 @@ const ModifyItem = ({ items, setItems, getItemNames }) => {
             }
         }
     }
-
 
     useEffect(updateGUI, [selectedItem])
 

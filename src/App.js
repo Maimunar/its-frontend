@@ -20,6 +20,7 @@ import ChatPage from './pages/ChatPage';
 import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
+  
   const [user, setUser] = useState()
   const [userType, setUserType] = useState('user')
   const [items, setItems] = useState([])
@@ -37,6 +38,7 @@ function App() {
       })
       .catch((err) => console.log(err))
   }
+
   useEffect(getItemNames, [])
 
   return (
@@ -59,7 +61,6 @@ function App() {
         </div>
       </div>
     </Router>
-
   );
 }
 

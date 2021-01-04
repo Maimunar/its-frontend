@@ -14,6 +14,7 @@ const RegisterPage = () => {
         'email': '',
     })
     const [succesfulRegister, setSuccesfulRegister] = useState(false)
+
     const handleEmailChange = (e) => {
         setEmail(e.target.value)
     }
@@ -65,10 +66,8 @@ const RegisterPage = () => {
             validation = false
         }
         setTimeout(clearErrors, 5000)
-
         return validation
     }
-
 
     const invalidRegister = () => {
         setError(true)
@@ -93,7 +92,6 @@ const RegisterPage = () => {
                     console.log(err)
                 })
         }
-
     }
 
     return (

@@ -6,11 +6,13 @@ const ItemsForABandStatistics = ({ items }) => {
     const [bands, setBands] = useState()
     const [itemsText, setItemsText] = useState('Please pick a band to see the ammount of articles shown of it')
     const [selectedBand, setSelectedBand] = useState('default')
+    
     const getBands = () => {
         let bandsList = items.map(item => item.bandName)
         bandsList = [...new Set(bandsList)]
         setBands(bandsList)
     }
+
     const getBandInfo = () => {
         if (selectedBand === 'default') return
         axios.get(`/api/items/perBand/${selectedBand}`, config(localStorage.getItem('token')))
@@ -20,6 +22,7 @@ const ItemsForABandStatistics = ({ items }) => {
             })
             .catch((err) => console.log(err))
     }
+
     useEffect(getBands, [items])
     useEffect(getBandInfo, [selectedBand])
 

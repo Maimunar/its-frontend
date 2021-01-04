@@ -22,9 +22,6 @@ const ItemsSorter = ({ items, setItems }) => {
         setBands(bandsList)
     }
 
-
-
-
     const getSizes = () => {
         const tempSizes = { "XS": XS, "S": S, "M": M, "L": L, "XL": XL }
         let returnSizes = []
@@ -72,7 +69,6 @@ const ItemsSorter = ({ items, setItems }) => {
         axios.get('/api/items' + searchQuery, config(localStorage.getItem('token')))
             .then((res) => setItems(res.data))
             .catch((err) => console.log(err))
-
     }
 
     const getMaxPrice = () => {
@@ -126,5 +122,5 @@ const ItemsSorter = ({ items, setItems }) => {
         </div>
     )
 }
-// onChange={(e) => setPriceFilter(e.target.value)}
+
 export default ItemsSorter;

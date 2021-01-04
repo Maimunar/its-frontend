@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import Message from '../components/ChatPage/Message'
-// import { socket } from '../service/socket'
 import axios from 'axios'
 import config from '../jwtconfig'
 import {io} from 'socket.io-client'
 import { withRouter } from 'react-router-dom'
 
-
 const ChatPage = ({ user }) => {
+
     const [messages, setMessages] = useState([])
     const [messageToSend, setMessageToSend] = useState()
     const [error, setError] = useState()
@@ -16,6 +15,7 @@ const ChatPage = ({ user }) => {
         setError(msg)
         setTimeout(() => setError(), 3000)
     }
+
     const getMessages = () => {
         console.log('getting messages')
         axios.get('/api/messages', config(localStorage.getItem('token')))
@@ -25,6 +25,7 @@ const ChatPage = ({ user }) => {
             })
             .catch((err) => console.log(err))
     }
+    
     const postMessage = (e) => {
         e.preventDefault()
         if (messageToSend.length > 0 && user) {

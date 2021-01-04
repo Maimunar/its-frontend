@@ -1,8 +1,7 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import config from '../../jwtconfig'
-
 
 const WishlistItem = ({ item }) => {
 
@@ -17,7 +16,7 @@ const WishlistItem = ({ item }) => {
     return (
         <div className="wishlist-item-container">
             <div className="wishlist-item-picture-container">
-                <img src={"/api/items/itemPicture/" + item.itemPicture} />
+                <img src={"/api/items/itemPicture/" + item.itemPicture} alt="Wishlist product Item" />
             </div>
             <div className="wishlist-item-content-container">
                 <h3>{item.itemName}</h3>
@@ -28,6 +27,5 @@ const WishlistItem = ({ item }) => {
         </div>
     )
 }
-
 
 export default WishlistItem
