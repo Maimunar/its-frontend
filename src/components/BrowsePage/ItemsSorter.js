@@ -115,7 +115,7 @@ const ItemsSorter = ({ items, setItems }) => {
                 <h4>Find all items above this price:</h4>
                 <div class="slidecontainer">
                     <input type="range" min="0" onMouseUp={(e) => setPriceFilter(e.target.value)}
-                        max={maxPrice} class="slider" id="myRange" />
+                      defaultValue={0}  max={maxPrice} class="slider" id="myRange" />
                 </div>
                 <p id="priceTag">{priceFilter}</p>
             </div>

@@ -24,7 +24,9 @@ const WishlistPage = ({ user }) => {
             .catch((err) => console.log(err))
     }
 
-    useEffect(getWishlist, [wishlist])
+    const subscribeToItemDelete = () => {}
+
+    useEffect(getWishlist, [subscribeToItemDelete])
     
     return (
         <div className="wishlist-container">
@@ -35,7 +37,7 @@ const WishlistPage = ({ user }) => {
                 </div>
                 <div className="wishlist-content">
                     {wishlist ? wishlist.map((item, key) =>
-                        <WishlistItem item={item} key={key} />) : <p>Your Wishlist is empty! Consider adding some items?</p>}
+                        <WishlistItem item={item} key={key} subscribeToItemDelete={subscribeToItemDelete} />) : <p>Your Wishlist is empty! Consider adding some items?</p>}
                 </div>
             </div>
         </div>

@@ -5,7 +5,7 @@ const ProtectedRoute = ({
     component: Component,
     user,
     ...rest }) => {
-    
+
     return (
         <Route {...rest}
             render={() => {

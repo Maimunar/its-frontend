@@ -49,7 +49,7 @@ function App() {
           <Switch>
             <Route path="/" render={() => <BrowsePage items={items} />} exact />
             <ProtectedRoute user={user} path="/admin" items={items} setItems={setItems} 
-            getItemsNames={getItemNames} component={AdminPanel}/>
+            getItemNames={getItemNames} component={AdminPanel}/>
             <ProtectedRoute user={user} path="/chat" component={ChatPage}/>          
             <ProtectedRoute user={user} path="/wishlist" component={WishlistPage}/>
             <Route path="/login" render={() => <LoginPage changeUserType={changeUserType} setUser={setUser} />} />

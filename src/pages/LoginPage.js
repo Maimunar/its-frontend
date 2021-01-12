@@ -31,6 +31,7 @@ const LoginPage = ({ changeUserType, setUser }) => {
             password: password
         }, config(localStorage.getItem('token')))
             .then((res) => {
+                console.log(res.data)
                 changeUserType(res.data.userType)
                 localStorage.setItem('token', res.data.token)
                 setUser(username)

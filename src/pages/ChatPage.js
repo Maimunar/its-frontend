@@ -17,7 +17,6 @@ const ChatPage = ({ user }) => {
     }
 
     const getMessages = () => {
-        console.log('getting messages')
         axios.get('/api/messages', config(localStorage.getItem('token')))
             .then((res) => {
                 let msgs = res.data.map(item => {return {'username': item.username, 'message': item.message}})
@@ -42,7 +41,7 @@ const ChatPage = ({ user }) => {
 
     const addMessage = (message) => {
         console.log('message received! message:', message)
-        setMessages((messages) => [...messages, message])
+        setMessages((messages) => [message, ...messages])
     }
     
     useEffect(() => { 

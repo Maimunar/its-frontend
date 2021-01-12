@@ -3,13 +3,16 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import config from '../../jwtconfig'
 
-const WishlistItem = ({ item }) => {
+const WishlistItem = ({ item, subscribeToItemDelete }) => {
 
     const handleDelete = (e) => {
         axios.post('/api/wishlist/deleteItem/' + localStorage.getItem('user'),
          {itemName: item.itemName }, 
          config(localStorage.getItem('token')))
-            .then((res) => console.log(res))
+            .then((res) => {
+            console.log(res);
+            subscribeToItemDelete()
+        })
             .catch((err) => console.log(err))
     }
 

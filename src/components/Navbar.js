@@ -13,7 +13,7 @@ const Navbar = ({ location, userType, user}) => {
 
     return (
         <nav className="navbar">
-            <div className="brand-name">Impericion - Band Merch</div>
+            <div className="brand-name">Impericion</div>
             <button onClick={() => toggleActive()} className="toggle-button">
                 <span className="bar"></span>
                 <span className="bar"></span>
