@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { withRouter } from 'react-router-dom'
 import WishlistItem from '../components/WishlistPage/WishlistItem'
 import config from '../jwtconfig'
 
@@ -15,7 +16,6 @@ const WishlistPage = ({ user }) => {
             .catch((err) => console.log(err))
     }
 
-
     const getWishlist = () => {
         axios.get('/api/wishlist/' + user, config(localStorage.getItem('token')))
             .then((res) => {
@@ -24,7 +24,10 @@ const WishlistPage = ({ user }) => {
             .catch((err) => console.log(err))
     }
 
-    useEffect(getWishlist, [wishlist])
+    const subscribeToItemDelete = () => {}
+
+    useEffect(getWishlist, [subscribeToItemDelete])
+    
     return (
         <div className="wishlist-container">
             <div className="wishlist-subcontainer">
@@ -34,11 +37,11 @@ const WishlistPage = ({ user }) => {
                 </div>
                 <div className="wishlist-content">
                     {wishlist ? wishlist.map((item, key) =>
-                        <WishlistItem item={item} key={key} />) : <p>Your Wishlist is empty! Consider adding some items?</p>}
+                        <WishlistItem item={item} key={key} subscribeToItemDelete={subscribeToItemDelete} />) : <p>Your Wishlist is empty! Consider adding some items?</p>}
                 </div>
             </div>
         </div>
     )
 }
 
-export default WishlistPage;
+export default withRouter(WishlistPage);

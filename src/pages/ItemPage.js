@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import config from '../jwtconfig'
 
 const ItemPage = ({ match }) => {
+
     const [item, setItem] = useState({
         itemName: "Item Name",
         bandName: "Band",
@@ -14,15 +15,16 @@ const ItemPage = ({ match }) => {
     })
     const [errorMsg, setErrorMsg] = useState()
     const [successMsg, setSuccessMsg] = useState()
+
     const handleError = (errorString) => {
         setErrorMsg(errorString)
         setTimeout(() => setErrorMsg(), 5000)
     }
+
     const handleSuccess = (successString) => {
         setSuccessMsg(successString)
         setTimeout(() => setSuccessMsg(), 5000)
     }
-
 
     const getItem = () => {
         axios.get('/api/items/' + match.params.itemName, config(localStorage.getItem('token')))
@@ -50,10 +52,10 @@ const ItemPage = ({ match }) => {
         } else {
             handleError("Please log in first.")
         }
-
     }
 
     useEffect(getItem, [])
+    
     return (
         <div className="wishlist-container">
             <div className="wishlist-subcontainer">

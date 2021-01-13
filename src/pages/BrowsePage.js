@@ -18,6 +18,4 @@ const BrowsePage = ({ items }) => {
     )
 }
 
-
-
 export default BrowsePage;

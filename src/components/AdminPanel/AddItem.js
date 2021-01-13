@@ -1,10 +1,9 @@
 import axios from 'axios';
 import React, { useState } from 'react'
-import { Redirect } from 'react-router-dom';
 import config from '../../jwtconfig'
 import ErrorDisplay from '../ErrorDisplay';
 
-const AddItem = ({ items, setItems, getItemNames }) => {
+const AddItem = ({ items, getItemNames }) => {
     const clothTypes = ["Shirt", "Sweatshirt", "Hat"]
     const [itemName, setItemName] = useState('')
     const [bandName, setBandName] = useState('')
@@ -51,10 +50,7 @@ const AddItem = ({ items, setItems, getItemNames }) => {
         return returnSizes
     }
 
-
-
     const validateForm = () => {
-
         let errors = ''
         const foundError = (errorMessage) => {
             errors += `${errorMessage}\n`
@@ -85,13 +81,11 @@ const AddItem = ({ items, setItems, getItemNames }) => {
         if (!itemReseller || itemReseller.length === 0)
             foundError('Please fill in the item reseller!')
 
-        console.log(errors)
         if (errors.length === 0) return true
         else {
             setErrorMsg(errors)
             return false
         }
-
     }
 
     const handleSubmit = (e) => {
@@ -106,25 +100,6 @@ const AddItem = ({ items, setItems, getItemNames }) => {
             form.set('type', itemType)
             form.set('linkToReseller', itemReseller)
             form.set('itemPicture', itemPicture)
-
-            console.log(
-                `
-                Item Name: ${itemName}
-                Band Name: ${bandName}
-                Description: ${description}
-                Price: ${price}
-                Available Sizes:
-                XS - ${sizes['XS']}
-                S - ${sizes['S']}
-                M - ${sizes['M']}
-                L - ${sizes['L']}
-                XL - ${sizes['XL']}
-                Clothing Type: ${itemType}
-                Reseller Link: ${itemReseller}
-                File with Reference: ${fileInput.current.files[0]}
-                File With State: ${itemPicture}
-                `
-            )
 
             axios.post('/api/items/modifyItem', form, config(localStorage.getItem('token')))
                 .then((res) => console.log(res))

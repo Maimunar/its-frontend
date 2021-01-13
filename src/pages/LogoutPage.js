@@ -8,6 +8,7 @@ const LogoutPage = ({ changeUserType, setUser }) => {
     changeUserType('user')
     setTimeout(() => setRedirect(true), 2000)
     setUser()
+    
     return (
         <div className="wishlist-container-small">
             <div className="wishlist-subcontainer">

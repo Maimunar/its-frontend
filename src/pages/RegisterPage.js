@@ -14,6 +14,7 @@ const RegisterPage = () => {
         'email': '',
     })
     const [succesfulRegister, setSuccesfulRegister] = useState(false)
+
     const handleEmailChange = (e) => {
         setEmail(e.target.value)
     }
@@ -65,10 +66,8 @@ const RegisterPage = () => {
             validation = false
         }
         setTimeout(clearErrors, 5000)
-
         return validation
     }
-
 
     const invalidRegister = () => {
         setError(true)
@@ -93,7 +92,6 @@ const RegisterPage = () => {
                     console.log(err)
                 })
         }
-
     }
 
     return (
@@ -110,10 +108,9 @@ const RegisterPage = () => {
                         <input type="text" placeholder="email" id="email" onChange={handleEmailChange} />
                         {errorMsg['password'] ? <p>{errorMsg['password']}</p> : ""}
                         <input type="password" placeholder="password" id="password" onChange={handlePasswordChange} />
-                        <input type="submit" value="Login" id="submitBtn" className="login_btn"></input>
+                        <input type="submit" value="Register" id="submitBtn" className="login_btn"></input>
                     </form>
                     <div>
-                        {localStorage.getItem('token') ? <Redirect to="/" /> : ""}
                         {succesfulRegister ? <Redirect to="/login" /> : ""}
                         <Link to="/login" className="link">Already have an account? Sign In</Link>
                     </div>
