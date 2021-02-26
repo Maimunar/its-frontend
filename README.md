@@ -24,3 +24,7 @@ To run it succesfully, run:
 docker-compose up -d --build
 To stop:
 docker-compose stop
+
+### Backend
+
+Backend can be found on https://github.com/Maimunar/its-backend
